@@ -12,10 +12,12 @@ exports.home = (req, res) => {
 
 exports.index = async (req, res) => {
 
+    console.log(req.user)
+
     try {
 
         const reservations = await Reservation
-            .find()
+            .find({ user: req.user._id })
             .populate("user")
             .sort({
                 updatedAt: "desc"
@@ -63,4 +65,77 @@ exports.create = async (req, res) => {
 }
 
 
+exports.show = async (req, res) => {
 
+    try {
+        const reservation = await Reservation
+            .findById(req.params.id)
+            .populate("user")
+            .sort({
+                updatedAt: "desc"
+            });
+
+        res.render(`${viewPath}/show`, {
+            title: "Show Page",
+            reservation: reservation
+        })
+    } catch (error) {
+        res.send(console.log(error))
+    }
+
+}
+
+
+exports.edit = async (req, res) => {
+    try {
+        const reservation = await Reservation.findById(req.params.id);
+        res.render(`${viewPath}/edit`, {
+            title: "edit reservation",
+            formData: reservation
+        });
+    } catch (error) {
+        req.flash('danger', `There was an error accessing this plan: ${error}`);
+        res.redirect('/login');
+    }
+};
+
+exports.update = async (req, res) => {
+    try {
+        console.log("user")
+        console.log(req.session.passport)
+        const { user } = req.session.passport
+
+        console.log("reservation")
+        console.log(req.body)
+
+        const contents = { user, ...req.body }
+        const reservation = await Reservation.findByIdAndUpdate(req.body.id, contents)
+
+        req.flash('success', 'The reservation was updated successfully');
+        res.redirect(`/reservations/${req.body.id}`);
+
+
+    } catch (error) {
+        req.flash('danger', `There was an error updating this plan: ${error}`);
+        res.redirect(`/reservations/${req.body.id}/edit`);
+
+
+    }
+
+}
+
+
+//delete
+exports.delete = async (req, res) => {
+
+    try {
+        console.log(req.body)
+        const user = await Reservation.deleteOne({ _id: req.body.id })
+        res.redirect("/reservations")
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}

@@ -1,0 +1,51 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+
+  <h3>Edit Reservation. <%= formData.title %></h3>
+
+  
+<form action="/reservations/update" method="POST" >
+    <div class="form-group">
+
+            <label for="location">Choose Location:</label>
+            <select class="form-control" id="location" name="location">
+              <option value="Kelseys">Kelseys</option>
+              <option value="Montanas">Montanas</option>
+              <option value="Outbacks">Outbacks</option>
+              <option value="Harveys">Harveys</option>
+              <option value="Swiss Chalet">Swiss Chalet</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+                <label for="numberOfCustomer">Number of people</label>
+                <input type="number" class="form-control" name="numberOfCustomer" value="<%= formData.numberOfCustomer %>">
+        </div>
+
+      
+        <div class="form-group">
+
+                <label for="location">Choose Time:</label>
+                <select class="form-control" id="time" name="time">
+                  <option value="11:00 AM">11:00 AM</option>
+                  <option value="1:00 PM">1:00 PM</option>
+                  <option value="3:00 PM">3:00 PM</option>
+                  <option value="5:00 PM">5:00 PM</option>
+                  <option value="7:00 PM">7:00 PM</option>
+                  <option value="9:00 PM">9:00 PM</option>
+      
+                </select>
+            </div>
+      
+        <input type="hidden" value="<%= formData._id %>" name="id">
+        
+        <button type="submit" class="btn btn-primary">Book it!</button>
+      </form>
+
+    </div>
+
+
+
+<%- include("../partials/footer") %>

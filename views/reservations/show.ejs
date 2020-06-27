@@ -3,13 +3,10 @@
 
     <%- include("../partials/header") %>
 
-
-
     <div class="container mt-4">
 
-        <h3 class="reservation-list">Your Reservation List: </h3>     
+        <h3>Your Reservation Detail: </h3>     
 
-        <% for(let reservation of reservations) { %>
 
             <div class="card">
                     <div class="card-header text-white bg-dark">
@@ -19,21 +16,12 @@
                       <h5 class="card-title">Customer Name : <%= reservation.user.fullName %> </h5>
                       <p class="card-title">the number of customers : <%= reservation.numberOfCustomer %></p>
                       <p class="card-text">Reserved Time: <%= reservation.time %></p>
-                      <a href="/reservations/<%= reservation._id %>" class="btn btn-primary">Details</a>
-                    
-                      <a class="btn btn-success" href="/reservations/<%= reservation._id %>/edit">Edit</a>
-                    
-                      <form class="form-inline" action="/reservations/delete" method="post">
-                      <input type="hidden" value="<%= reservation._id %>" name="id">
-                      <button class="btn btn-danger mt-1" type="submit">Delete</button>
-                      </form>
-
+                      <a href="/reservations" class="btn btn-primary">Back</a>
                     </div>
                   </div>
 
                   &nbsp;&nbsp;
     
-        <% }%>
 
         
     </div>

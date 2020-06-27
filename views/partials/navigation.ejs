@@ -10,31 +10,51 @@
               <a class="nav-link" href="/home">Home</a> <span class="sr-only">(current)</span></a>
             </li>
 
+            <% if (authorized) { %>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Your Reservation
               </a>
+          
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/reservations/new">Make a reservation</a>
                 <a class="dropdown-item" href="/reservations">See your reservation</a>
               </div>
             </li>
+            <% } %>
+
           </ul>
+
+
           <form class="form-inline my-2 my-lg-0">
 
-            <ul class="navbar-nav mr-auto">
+              <ul class="navbar-nav mr-auto">
+
+            <% if (!authorized) { %>
+
+              
               <li class="nav-item active">
                 <a class="nav-link" href="/login">Login</a> <span class="sr-only">(current)</span></a>
               </li>
+              <% } %>
 
-              <li class="nav-item active">
-                <a class="nav-link" href="/logout">Logout</a> <span class="sr-only">(current)</span></a>
-              </li>
+              <% if (!authorized) { %>
 
               <li class="nav-item active">
                   <a class="nav-link" href="/users/new">Register</a> <span class="sr-only">(current)</span></a>
                 </li>
+              <% } %>
+
+              <% if (authorized) { %>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/logout">Logout</a> <span class="sr-only">(current)</span></a>
+                </li>
+                <% } %>
+  
               </ul>                
+  
+  
           
           </form>
         </div>

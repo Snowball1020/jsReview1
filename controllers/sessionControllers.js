@@ -25,6 +25,7 @@ exports.authenticate = async (req, res, next) => {
 
 exports.logout = async (req, res) => {
     req.logout();
+    req.flash("success", "You are logged out")
     res.redirect("/login")
 
 }
