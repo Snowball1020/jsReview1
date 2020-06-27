@@ -1,0 +1,33 @@
+
+
+
+    <%- include("../partials/header") %>
+
+
+
+    <div class="container mt-4">
+
+        <% for(let reservation of reservations) { %>
+
+            <div class="card">
+                    <div class="card-header">
+                      <%= reservation.location %>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">Customer Name : <%= reservation.user.fullName %> </h5>
+                      <p class="card-title">the number of customers : <%= reservation.numberOfCustomer %></p>
+                      <p class="card-text">Reserved Time: <%= reservation.time %></p>
+                      <a href="#" class="btn btn-primary">Details</a>
+                    </div>
+                  </div>
+
+                  &nbsp;&nbsp;
+    
+        <% }%>
+
+        
+    </div>
+
+
+
+    <%- include("../partials/footer") %>
