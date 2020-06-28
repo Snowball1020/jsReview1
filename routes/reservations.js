@@ -1,20 +1,22 @@
 
+//Calling each route from reservation controllers
 const { index, home, new: _new, create, show, delete: _delete, edit, update } = require("../controllers/reservationControllers")
 
-
-const { ensureAuthenticated } = require("../auth")
+//calling the authenticated function to set the auth
+const { authenticated } = require("../auth")
 
 module.exports = router => {
-    router.get("/home", home)
+    router.get("/", home) // public
 
-    router.get("/reservations", ensureAuthenticated, index)
-    router.post("/reservations/update", ensureAuthenticated, update)
-    router.post("/reservations/delete", ensureAuthenticated, _delete)
-    router.post("/reservations", ensureAuthenticated, create)
-    router.get("/reservations/new", ensureAuthenticated, _new)
-
-    router.get("/reservations/:id/edit", ensureAuthenticated, edit)
-    router.get("/reservations/:id", ensureAuthenticated, show)
+    //below routes are all private
+    router.get("/reservations", authenticated, index)
+    router.post("/reservations/update", authenticated, update)
+    router.post("/reservations/delete", authenticated, _delete)
+    router.post("/reservations", authenticated, create)
+    router.get("/reservations/new", authenticated, _new)
+    //with :id
+    router.get("/reservations/:id/edit", authenticated, edit)
+    router.get("/reservations/:id", authenticated, show)
 
 }
 

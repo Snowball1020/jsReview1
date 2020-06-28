@@ -7,13 +7,13 @@
 
     <div class="container mt-4">
 
-        <h3 class="reservation-list">Your Reservation List: </h3>     
+        <h4 class="reservation-list">Your Reservation List: </h4>     
 
         <% for(let reservation of reservations) { %>
 
             <div class="card">
-                    <div class="card-header text-white bg-dark">
-                      Location: <%= reservation.location %>
+                    <div class="card-header text-white bg-dark" >
+                      Location: <span class="location"><%= reservation.location %></span> <span class="time"> Updated at: <%= reservation.updatedAt.toLocaleString() %> </span>
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">Customer Name : <%= reservation.user.fullName %> </h5>
@@ -25,7 +25,8 @@
                     
                       <form class="form-inline" action="/reservations/delete" method="post">
                       <input type="hidden" value="<%= reservation._id %>" name="id">
-                      <button class="btn btn-danger mt-1" type="submit">Delete</button>
+                      <button class="btn btn-danger" type="submit">Delete</button>
+                   
                       </form>
 
                     </div>

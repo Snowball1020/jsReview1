@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const ReservationSchema = new mongoose.Schema({
 
-
+    //refered User Model and its objectId as one of documents in Reservation document
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -21,8 +21,6 @@ const ReservationSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
-
 
 }, {
         timestamps: true

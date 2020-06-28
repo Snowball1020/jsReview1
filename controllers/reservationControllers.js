@@ -1,18 +1,16 @@
 const viewPath = "reservations";
-
 const Reservation = require("../model/reservation")
 const User = require("../model/user")
 
+//Home page
 exports.home = (req, res) => {
     res.render(`${viewPath}/home`, {
         title: "Home"
     })
 }
 
-
+//Index page
 exports.index = async (req, res) => {
-
-    console.log(req.user)
 
     try {
 
@@ -27,44 +25,36 @@ exports.index = async (req, res) => {
             title: "Index Page",
             reservations: reservations
         })
+
     } catch (error) {
         res.send(console.log(error))
     }
-
-
 }
 
+//New page
 exports.new = async (req, res) => {
     res.render(`${viewPath}/new`, {
         title: "New Reservation",
         name: req.user.firstName
     })
-
 }
 
-
+//Create new reservation
 exports.create = async (req, res) => {
 
     try {
 
-        console.log(req.user.email)
-
-
         const user = await User.findOne({ email: req.user.email })
-
-        console.log(user);
-
         const reservation = await Reservation.create({ user: user._id, ...req.body })
-        console.log("Reservation successfully made")
-        console.log(reservation)
         res.redirect("/reservations")
+
     } catch (error) {
         console.log(error)
     }
 
 }
 
-
+//Show page
 exports.show = async (req, res) => {
 
     try {
@@ -85,7 +75,7 @@ exports.show = async (req, res) => {
 
 }
 
-
+//Edit page
 exports.edit = async (req, res) => {
     try {
         const reservation = await Reservation.findById(req.params.id);
@@ -99,14 +89,10 @@ exports.edit = async (req, res) => {
     }
 };
 
+//Update page
 exports.update = async (req, res) => {
     try {
-        console.log("user")
-        console.log(req.session.passport)
         const { user } = req.session.passport
-
-        console.log("reservation")
-        console.log(req.body)
 
         const contents = { user, ...req.body }
         const reservation = await Reservation.findByIdAndUpdate(req.body.id, contents)
@@ -114,28 +100,22 @@ exports.update = async (req, res) => {
         req.flash('success', 'The reservation was updated successfully');
         res.redirect(`/reservations/${req.body.id}`);
 
-
     } catch (error) {
         req.flash('danger', `There was an error updating this plan: ${error}`);
         res.redirect(`/reservations/${req.body.id}/edit`);
-
-
     }
-
 }
 
 
-//delete
+//Delete page
 exports.delete = async (req, res) => {
 
     try {
-        console.log(req.body)
         const user = await Reservation.deleteOne({ _id: req.body.id })
         res.redirect("/reservations")
 
     } catch (error) {
         console.log(error)
     }
-
 
 }

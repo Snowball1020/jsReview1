@@ -1,6 +1,13 @@
+
+
+
 .homepage{
-    background: lightgreen;
-    text-align: center
+    padding-top: 18rem;
+    color: aliceblue;
+    height: 95%;
+    width: 100%;
+    background: navy;
+    text-align: center;
 }
 
 .welcome-message{
@@ -9,4 +16,18 @@
 
 .reservation-list{
     text-align: center
+}
+
+.time{
+    float: right;
+    text-align: right
+}
+
+.form-inline{
+    display: inline;
+}
+
+.location{
+    font-weight: bold;
+    color: gold
 }

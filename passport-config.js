@@ -2,7 +2,6 @@ const LocalStrategy = require("passport-local").Strategy
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 
-
 const User = require("./model/user")
 
 module.exports = function (passport) {
@@ -14,11 +13,10 @@ module.exports = function (passport) {
                         return done(null, false, { message: "the email is not found" })
                     }
 
-                    //pass
-
-
                     bcrypt.compare(password, user.password, (err, isMacth) => {
-                        if (err) throw err;
+                        if (err) {
+                            console.log(err)
+                        }
 
                         if (isMacth) {
                             return done(null, user)
@@ -26,22 +24,19 @@ module.exports = function (passport) {
                             return done(null, false, { message: "password incorrect" })
                         }
                     })
-
                 })
                 .catch(err => console.log(err))
         })
     )
 
-    //after validation 
-
-
+    //serialize and deserialize templates
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
 
     passport.deserializeUser((id, done) => {
-        User.findById(id, (err, user) => {
-            done(err, user);
+        User.findById(id, (error, user) => {
+            done(error, user);
         });
     });
 

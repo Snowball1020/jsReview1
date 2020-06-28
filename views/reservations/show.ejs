@@ -5,24 +5,24 @@
 
     <div class="container mt-4">
 
-        <h3>Your Reservation Detail: </h3>     
+        <h4 style="text-align: center">Your Reservation Detail: </h4>     
 
-
-            <div class="card">
+    
+                  <div class="card text-center">
                     <div class="card-header text-white bg-dark">
-                      Location: <%= reservation.location %>
+                      Location: <span class="location"><%= reservation.location %></span> 
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">Customer Name : <%= reservation.user.fullName %> </h5>
                       <p class="card-title">the number of customers : <%= reservation.numberOfCustomer %></p>
                       <p class="card-text">Reserved Time: <%= reservation.time %></p>
-                      <a href="/reservations" class="btn btn-primary">Back</a>
+                      <a href="/reservations" class="btn btn-secondary">Back</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                      <span>Updated at : <%= reservation.updatedAt.toLocaleString() %></span>
                     </div>
                   </div>
-
-                  &nbsp;&nbsp;
-    
-
+                  
         
     </div>
 
